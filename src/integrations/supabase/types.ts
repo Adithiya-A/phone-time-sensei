@@ -9,7 +9,232 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      app_usage: {
+        Row: {
+          app_name: string
+          category: string | null
+          created_at: string
+          id: string
+          usage_date: string
+          usage_minutes: number
+          user_id: string
+        }
+        Insert: {
+          app_name: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          usage_date?: string
+          usage_minutes: number
+          user_id: string
+        }
+        Update: {
+          app_name?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          usage_date?: string
+          usage_minutes?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "app_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          difficulty: string
+          id: string
+          points: number
+          title: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          difficulty: string
+          id?: string
+          points: number
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          difficulty?: string
+          id?: string
+          points?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      goals: {
+        Row: {
+          active: boolean
+          app_name: string | null
+          category: string | null
+          created_at: string
+          daily_limit_minutes: number
+          id: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          app_name?: string | null
+          category?: string | null
+          created_at?: string
+          daily_limit_minutes: number
+          id?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          app_name?: string | null
+          category?: string | null
+          created_at?: string
+          daily_limit_minutes?: number
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      rewards: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          points_required: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          points_required: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          points_required?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      user_challenges: {
+        Row: {
+          challenge_id: string
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_challenges_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_challenges_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_rewards: {
+        Row: {
+          id: string
+          redeemed_at: string
+          reward_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          redeemed_at?: string
+          reward_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          redeemed_at?: string
+          reward_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_rewards_reward_id_fkey"
+            columns: ["reward_id"]
+            isOneToOne: false
+            referencedRelation: "rewards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_rewards_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
