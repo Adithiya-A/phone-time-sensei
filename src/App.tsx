@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import GoalSetting from "@/components/GoalSetting";
 import Layout from "@/components/Layout";
+import Challenges from "./pages/Challenges";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
               <GoalSetting />
             </Layout>
           } />
+          <Route path="/challenges" element={<Challenges />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
